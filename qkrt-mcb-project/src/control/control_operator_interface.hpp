@@ -37,6 +37,9 @@ public:
     float getChassisOmniLeftBackInput();
     float getChassisOmniRightFrontInput();
     float getChassisOmniRightBackInput();
+
+    mockable float getTurretPitchInput();                 
+    mockable float getTurretYawInput();
 private:
     tap::communication::serial::Remote &remote;
 };

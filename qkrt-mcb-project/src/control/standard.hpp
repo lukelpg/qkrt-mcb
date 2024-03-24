@@ -22,8 +22,14 @@
 #include "tap/control/hold_command_mapping.hpp"
 #include "tap/control/hold_repeat_command_mapping.hpp"
 #include "tap/control/setpoint/commands/move_integral_command.hpp"
+#include "tap/control/command_mapper.hpp"
+#include "tap/control/press_command_mapping.hpp"
 
-#include "control/agitator/velocity_agitator_subsystem.hpp"
+// #include "control/turret/turret_subsystem.hpp"
+// #include "control/turret/turret_gimbal_command.hpp"
+
+
+#include "control/algorithms/edu_pid.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/chassis_omni_drive_command.hpp"
 
@@ -35,7 +41,7 @@ class Robot
 {
 public:
     Robot(Drivers &drivers);
-    void initSubsystemCommands();
+    void initSubsystemCommands(tap::Drivers *drivers);
 
 private:
     void initializeSubsystems();
@@ -53,10 +59,16 @@ private:
 
     algorithms::EduPidConfig eduPidConfig; 
     tap::control::setpoint::MoveIntegralCommand::Config moveIntegralConfig;
-    agitator::VelocityAgitatorSubsystem velocityAgitatorSubsystem;
+    // agitator::VelocityAgitatorSubsystem velocityAgitatorSubsystem;
 
-    tap::control::setpoint::MoveIntegralCommand moveIntegralCommand;
-    tap::control::HoldRepeatCommandMapping rightSwitchUp;
-    tap::control::HoldCommandMapping HCM;
+    // tap::control::setpoint::MoveIntegralCommand moveIntegralCommand;
+    // tap::control::HoldRepeatCommandMapping rightSwitchUp;
+    // tap::control::HoldCommandMapping HCM;
+
+    // // declare TurretSubystem
+    // turret::TurretSubsystem turret;
+
+    // // declare TurretGimbalCommand
+    // turret::TurretGimbalCommand turretGimbal;
 };
 }  // namespace control
