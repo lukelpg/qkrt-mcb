@@ -23,9 +23,11 @@
 #include "tap/control/hold_repeat_command_mapping.hpp"
 #include "tap/control/setpoint/commands/move_integral_command.hpp"
 
-#include "control/agitator/velocity_agitator_subsystem.hpp"
+#include "control/agitator/agitator_subsystem.hpp"
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/chassis_tank_drive_command.hpp"
+
+#include "control/algorithms/edu_pid.hpp"
 
 class Drivers;
 
@@ -58,7 +60,7 @@ private:
 
     algorithms::EduPidConfig eduPidConfig; 
     tap::control::setpoint::MoveIntegralCommand::Config moveIntegralConfig;
-    agitator::VelocityAgitatorSubsystem velocityAgitatorSubsystem;
+    agitator::AgitatorSubsystem velocityAgitatorSubsystem;
 
     
     // STEP 2 (Agitator Control): declare MoveIntegralCommand

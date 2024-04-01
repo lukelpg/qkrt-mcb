@@ -29,6 +29,10 @@
 #include "control/chassis/chassis_subsystem.hpp"
 #include "control/chassis/chassis_tank_drive_command.hpp"
 
+#include "agitator/agitator_rotate_command.hpp"
+#include "agitator/agitator_reverse_command.hpp"
+#include "agitator/agitator_subsystem.hpp"
+
 #include "flywheel/flywheel_subsystem.hpp"
 #include "flywheel/flywheel_on_command.hpp"
 
@@ -47,14 +51,17 @@ using namespace tap::communication::serial;
 
 driversFunc drivers = DoNotUse_getDrivers;
 control::flywheel::FlywheelSubsystem theFlywheel(drivers());
+control::agitator::AgitatorSubsystem theAgitator(drivers());
+
 control::flywheel::FlywheelOnCommand flywheelCommand(&theFlywheel);
+control::agitator::AgitatorRotateCommand rotateCommand(&theAgitator);
 
 namespace control
 {
 
 HoldRepeatCommandMapping leftSwitchUp(
     drivers(),
-    {&flywheelCommand},
+    {&rotateCommand, &flywheelCommand},
     RemoteMapState(Remote::Switch::LEFT_SWITCH, Remote::SwitchState::UP), true, -1);
 
 Robot::Robot(Drivers &drivers) : drivers(drivers),
